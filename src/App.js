@@ -8,6 +8,8 @@ import Login from "./Pages/Login/Login";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import SignUp from "./Pages/Login/SignUp";
+import ResetPassword from "./Pages/Login/ResetPassword";
 
 function App() {
   useEffect(() => {
@@ -21,6 +23,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/reset_pass" element={<ResetPassword />} />
       </Routes>
     </Navbar>
   );

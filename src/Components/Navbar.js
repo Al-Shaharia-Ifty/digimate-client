@@ -1,15 +1,23 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink } from "react-router-dom";
+import auth from "../firebase.init";
 
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
+  const [user] = useAuthState(auth);
+
+  const logout = () => {
+    signOut(auth);
+  };
   return (
     <div className="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="w-full navbar bg-base-100 fixed top-0 z-10 lg:px-12">
-          <div className="flex-1 px-2 mx-2 text-3xl">Pure Digimate</div>
+          <div className="flex-1 px-2 mx-2 text-3xl">Pure Digimart</div>
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
@@ -60,10 +68,10 @@ const Navbar = ({ children }) => {
                   className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <a>Item 1</a>
+                    <Link to="">Item 1</Link>
                   </li>
                   <li>
-                    <a>Item 2</a>
+                    <Link to="">Item 2</Link>
                   </li>
                 </ul>
               </li>
@@ -91,22 +99,26 @@ const Navbar = ({ children }) => {
                   </svg>
                 </label>
               </li>
-              <li>
-                <Link
-                  to="/login"
-                  className="rounded-lg btn btn-success btn-outline"
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/sign_out"
-                  className="rounded-lg btn btn-error btn-outline"
-                >
-                  Sign Out
-                </Link>
-              </li>
+              {user ? (
+                <li>
+                  <button
+                    onClick={logout}
+                    to="/sign_out"
+                    className="rounded-lg btn btn-error btn-outline"
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    to="/login"
+                    className="rounded-lg btn btn-success btn-outline"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -144,10 +156,10 @@ const Navbar = ({ children }) => {
             <div className="collapse-title text-xl font-medium">Book Now</div>
             <div className="collapse-content">
               <li>
-                <a>Item 1</a>
+                <Link to="">Item 1</Link>
               </li>
               <li>
-                <a>Item 2</a>
+                <Link to="">Item 2</Link>
               </li>
             </div>
           </div>
@@ -175,22 +187,26 @@ const Navbar = ({ children }) => {
               </svg>
             </label>
           </li>
-          <li>
-            <Link
-              to="/login"
-              className="rounded-lg btn btn-success btn-outline"
-            >
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/sign_out"
-              className="rounded-lg btn btn-error btn-outline"
-            >
-              Sign Out
-            </Link>
-          </li>
+          {user ? (
+            <li>
+              <button
+                onClick={logout}
+                to="/sign_out"
+                className="rounded-lg btn btn-error btn-outline"
+              >
+                Sign Out
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/login"
+                className="rounded-lg btn btn-success btn-outline"
+              >
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>

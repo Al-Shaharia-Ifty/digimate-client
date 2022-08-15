@@ -1,57 +1,85 @@
 import React, { useEffect } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import auth from "../../firebase.init";
 import Loading from "../../Components/Loading";
+import auth from "../../firebase.init";
 
-const Login = () => {
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-  let signInErrorMessage;
+const SignUp = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const navigate = useNavigate();
-  // let location = useLocation();
-  // let from = location.state?.from?.pathname || "/";
+  let signInErrorMessage;
 
   useEffect(() => {
-    if (user) {
-      // navigate(from, { replace: true });
+    if (user || gUser) {
       navigate("/");
     }
-  }, [navigate, user]);
+  }, [navigate, user, gUser]);
 
-  if (loading) {
+  if (loading || gLoading || updating) {
     return <Loading />;
   }
 
-  if (error) {
-    signInErrorMessage = <p className="text-red-500 mb-2">{error?.message}</p>;
+  if (error || gError || updateError) {
+    signInErrorMessage = (
+      <p className="text-red-500 mb-2">{error?.message || gError?.message}</p>
+    );
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    signInWithEmailAndPassword(data.email, data.password);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
   };
-
   return (
     <div className="flex h-screen justify-center items-center bg-accent mt-16">
       <div
-        className="card  max-w-md bg-base-100 shadow-xl"
+        className="card w-96 bg-base-100 shadow-xl"
         data-aos="fade-up"
         data-aos-delay="200"
         data-aos-duration="1000"
       >
         <div className="card-body">
-          <h2 className="text-center text-3xl">Login</h2>
+          <h2 className="text-center text-3xl">Sing Up</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="input input-bordered w-full max-w-xs"
+                {...register("name", {
+                  required: {
+                    value: true,
+                    message: "Name is required",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.name?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
+              </label>
+            </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -121,26 +149,27 @@ const Login = () => {
             {signInErrorMessage}
             <input
               className="btn btn-primary w-full max-w-xs"
-              value="login"
+              value="Sign Up"
               type="submit"
             />
           </form>
           <p>
-            New to Pure Digimate{" "}
-            <Link to="/signup" className="text-blue-500">
-              Create and Account
-            </Link>{" "}
-          </p>
-          <p>
-            Are you forget your password?{" "}
-            <Link to="/reset_pass" className="text-blue-500">
-              Reset Password
+            Already have an account{" "}
+            <Link to="/login" className="text-blue-500">
+              Please LogIn
             </Link>
           </p>
+          <div className="divider">OR</div>
+          <button
+            onClick={() => signInWithGoogle()}
+            className="btn btn-outline w-full"
+          >
+            Continue with google
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;
