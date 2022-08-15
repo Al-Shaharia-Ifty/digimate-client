@@ -4,7 +4,7 @@ import Home from "./Pages/Home/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Services from "./Pages/Services";
-import Login from "./Pages/Login";
+import Login from "./Pages/Login/Login";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
