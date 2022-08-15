@@ -4,32 +4,32 @@ import { Link, NavLink } from "react-router-dom";
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
   return (
-    <div class="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
-      <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col">
+    <div className="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
+      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
-        <div class="w-full navbar bg-base-100 fixed top-0 z-10 lg:px-12">
-          <div class="flex-1 px-2 mx-2 text-3xl">Pure Digimate</div>
-          <div class="flex-none lg:hidden">
-            <label for="my-drawer-3" class="btn btn-square btn-ghost">
+        <div className="w-full navbar bg-base-100 fixed top-0 z-10 lg:px-12">
+          <div className="flex-1 px-2 mx-2 text-3xl">Pure Digimate</div>
+          <div className="flex-none lg:hidden">
+            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="inline-block w-6 h-6 stroke-current"
+                className="inline-block w-6 h-6 stroke-current"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
               </svg>
             </label>
           </div>
 
-          <div class="flex-none hidden lg:block">
-            <ul class="menu menu-horizontal gap-x-2">
+          <div className="flex-none hidden lg:block">
+            <ul className="menu menu-horizontal gap-x-2">
               {/* <!-- Navbar menu content here --> */}
               <li>
                 <NavLink to="/" className="rounded-lg">
@@ -51,13 +51,13 @@ const Navbar = ({ children }) => {
                   Contact
                 </NavLink>
               </li>
-              <li class="dropdown dropdown-end dropdown-hover rounded-lg">
-                <label tabindex="0" class="btn btn-primary btn-outline">
+              <li className="dropdown dropdown-end dropdown-hover rounded-lg">
+                <label tabIndex="0" className="btn btn-primary btn-outline">
                   Book Now
                 </label>
                 <ul
-                  tabindex="0"
-                  class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  tabIndex="0"
+                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
                     <a>Item 1</a>
@@ -68,13 +68,13 @@ const Navbar = ({ children }) => {
                 </ul>
               </li>
               <li>
-                <label class="swap swap-rotate py-0">
+                <label className="swap swap-rotate py-0">
                   {/* <!-- this hidden checkbox controls the state --> */}
                   <input type="checkbox" onChange={() => setDark(!dark)} />
 
                   {/* <!-- sun icon --> */}
                   <svg
-                    class="swap-on fill-current w-10 h-10"
+                    className="swap-on fill-current w-10 h-10"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
@@ -83,7 +83,7 @@ const Navbar = ({ children }) => {
 
                   {/* <!-- moon icon --> */}
                   <svg
-                    class="swap-off fill-current w-10 h-10"
+                    className="swap-off fill-current w-10 h-10"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
@@ -113,9 +113,9 @@ const Navbar = ({ children }) => {
         {/* <!-- Page content here --> */}
         {children}
       </div>
-      <div class="drawer-side">
-        <label for="my-drawer-3" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
           {/* <!-- Sidebar content here --> */}
           <li>
             <NavLink to="/" className="rounded-lg">
@@ -138,11 +138,11 @@ const Navbar = ({ children }) => {
             </NavLink>
           </li>
           <div
-            tabindex="0"
-            class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+            tabIndex="0"
+            className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
           >
-            <div class="collapse-title text-xl font-medium">Book Now</div>
-            <div class="collapse-content">
+            <div className="collapse-title text-xl font-medium">Book Now</div>
+            <div className="collapse-content">
               <li>
                 <a>Item 1</a>
               </li>
@@ -152,13 +152,13 @@ const Navbar = ({ children }) => {
             </div>
           </div>
           <li>
-            <label class="swap swap-rotate">
+            <label className="swap swap-rotate">
               {/* <!-- this hidden checkbox controls the state --> */}
               <input type="checkbox" onChange={() => setDark(!dark)} />
 
               {/* <!-- sun icon --> */}
               <svg
-                class="swap-on fill-current w-10 h-10"
+                className="swap-on fill-current w-10 h-10"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -167,7 +167,7 @@ const Navbar = ({ children }) => {
 
               {/* <!-- moon icon --> */}
               <svg
-                class="swap-off fill-current w-10 h-10"
+                className="swap-off fill-current w-10 h-10"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
