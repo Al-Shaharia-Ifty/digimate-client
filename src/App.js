@@ -11,10 +11,8 @@ import { useEffect } from "react";
 import SignUp from "./Pages/Login/SignUp";
 import ResetPassword from "./Pages/Login/ResetPassword";
 
+AOS.init();
 function App() {
-  useEffect(() => {
-    AOS.init();
-  }, []);
   return (
     <Navbar>
       <Routes>
