@@ -7,7 +7,6 @@ import Services from "./Pages/Services";
 import Login from "./Pages/Login/Login";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 import SignUp from "./Pages/Login/SignUp";
 import ResetPassword from "./Pages/Login/ResetPassword";
 

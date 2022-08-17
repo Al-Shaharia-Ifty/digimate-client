@@ -52,14 +52,14 @@ const Login = () => {
           <h2 className="text-center text-3xl">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
-            <div className="form-control w-full max-w-xs">
+            <div className="form-control w-full max-w-sm">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
                 placeholder="Your Email"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-sm"
                 {...register("email", {
                   required: {
                     value: true,
@@ -85,14 +85,14 @@ const Login = () => {
               </label>
             </div>
             {/* Password */}
-            <div className="form-control w-full max-w-xs">
+            <div className="form-control w-full max-w-sm">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
                 type="password"
                 placeholder="Your Password"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-sm"
                 {...register("password", {
                   required: {
                     value: true,
@@ -120,7 +120,7 @@ const Login = () => {
             {/*  */}
             {signInErrorMessage}
             <input
-              className="btn btn-primary w-full max-w-xs"
+              className="btn btn-primary w-full max-w-sm"
               value="login"
               type="submit"
             />

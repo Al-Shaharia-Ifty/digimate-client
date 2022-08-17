@@ -19,12 +19,12 @@ module.exports = {
       {
         dark: {
           primary: "#D9F99D",
-          secondary: "#Ffffff",
+          secondary: "#Ffffff", //text color
           // secondary: "#FDE68A",
           accent: "#4B5563",
           neutral: "#263c40",
           "base-100": "#1F2937",
-          info: "#98A8DD",
+          info: "#4B5563",
           success: "#1BBB70",
           warning: "#F59E0B",
           error: "#FB7185",
