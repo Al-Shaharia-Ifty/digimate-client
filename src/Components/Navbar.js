@@ -8,6 +8,7 @@ import Loading from "./Loading";
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
   const [user, loading] = useAuthState(auth);
+  console.log(window.location.pathname);
 
   if (loading) {
     return <Loading />;
@@ -22,7 +23,31 @@ const Navbar = ({ children }) => {
       <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="w-full navbar bg-base-100 fixed top-0 z-10 lg:px-12">
-          <div className="flex-1 px-2 mx-2 text-3xl">Pure Digimart</div>
+          {/* <div className="navbar-end w-12 ">
+            <label
+              htmlFor="dashboard-sidebar"
+              tabIndex="1"
+              className="btn btn-ghost lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+          </div> */}
+          <div className="flex-1 px-2 mx-2 text-3xl">
+            <Link to="/">Pure Digimart</Link>
+          </div>
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
