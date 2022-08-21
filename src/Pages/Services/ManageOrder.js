@@ -24,6 +24,8 @@ const ManageOrder = () => {
               <th></th>
               <th>User Name</th>
               <th>Product Name</th>
+              <th>Phone</th>
+              <th>Address</th>
               <th>Order</th>
               <th>Price</th>
               <th>Action</th>
@@ -31,12 +33,14 @@ const ManageOrder = () => {
           </thead>
           <tbody>
             {order.map((o, index) => (
-              <tr>
-                <td>{index + 1}</td>
+              <tr key={index}>
+                <th>{index + 1}</th>
                 <td>{o.name}</td>
                 <td>{o.productName}</td>
+                <td>{o.phone}</td>
+                <td>{o.address}</td>
                 <td>{o.order}</td>
-                <td>${o.price}</td>
+                <td>৳ {o.price}</td>
                 <td>
                   {o.paid === "pending" && (
                     <>

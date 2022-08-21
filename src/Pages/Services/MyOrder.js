@@ -14,6 +14,9 @@ const MyOrder = () => {
       const url = `http://localhost:5000/order?buyer=${user.email}`;
       fetch(url, {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => setOrder(data));

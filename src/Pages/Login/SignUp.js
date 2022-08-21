@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
@@ -13,8 +13,9 @@ import useNewMember from "../../Hooks/useNewMember";
 const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
   const [token] = useNewMember(gUser || user);
 
   const navigate = useNavigate();
@@ -43,9 +44,27 @@ const SignUp = () => {
   }
 
   const onSubmit = async (data) => {
-    console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
+    const name = data.name;
+    const email = data.email;
+    const currentUser = { name: name, email: email, role: "member" };
+    if (email) {
+      fetch(`http://localhost:5000/user/member/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(currentUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const accessToken = data.token;
+          localStorage.setItem("accessToken", accessToken);
+        });
+    }
+
+    navigate("/");
   };
   return (
     <div className="flex h-screen justify-center items-center bg-accent mt-16">

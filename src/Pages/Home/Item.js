@@ -6,7 +6,7 @@ const Item = ({ item }) => {
   const { img, _id, price, name } = item;
 
   return (
-    <div class="card bg-neutral hover:shadow-xl transition ease-linear duration-200 ">
+    <div className="card bg-neutral hover:shadow-xl transition ease-linear duration-200 ">
       <div className="overflow-hidden h-[300px]">
         <img
           src={img}
@@ -14,14 +14,14 @@ const Item = ({ item }) => {
           className="hover:scale-125 transition ease-linear delay-75 duration-500 h-full mx-auto"
         />
       </div>
-      <div class="card-body">
-        <h2 class="card-title">{name}</h2>
+      <div className="card-body">
+        <h2 className="card-title">{name}</h2>
         <p>
           <span className="font-bold">Price:</span> {price} Taka
         </p>
-        <div class="card-actions justify-end ">
+        <div className="card-actions justify-end ">
           <Link to={`product/${_id}`}>
-            <button class="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">Buy Now</button>
           </Link>
         </div>
       </div>

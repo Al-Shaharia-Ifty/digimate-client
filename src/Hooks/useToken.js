@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
-const useNewMember = (user) => {
+const useToken = (user) => {
   const [token, setToken] = useState("");
   useEffect(() => {
-    const name = user?.user?.displayName;
     const email = user?.user?.email;
-    const currentUser = { name: name, email: email, role: "member" };
+    const currentUser = { email: email };
     if (email) {
-      fetch(`http://localhost:5000/user/member/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -25,4 +24,4 @@ const useNewMember = (user) => {
   return [token];
 };
 
-export default useNewMember;
+export default useToken;

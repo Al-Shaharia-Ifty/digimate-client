@@ -1,14 +1,22 @@
 import React, { useEffect } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import Loading from "../../Components/Loading";
+import useToken from "../../Hooks/useToken";
+import useNewMember from "../../Hooks/useNewMember";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   let signInErrorMessage;
+  const [token] = useToken(user);
+  const [gToken] = useNewMember(gUser);
 
   const {
     register,
@@ -21,21 +29,22 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) {
+    if (token || gToken) {
       navigate(from, { replace: true });
     }
-  }, [navigate, user, from]);
+  }, [navigate, token, from, gToken]);
 
-  if (loading) {
+  if (loading || gLoading) {
     return <Loading />;
   }
 
-  if (error) {
-    signInErrorMessage = <p className="text-red-500 mb-2">{error?.message}</p>;
+  if (error || gError) {
+    signInErrorMessage = (
+      <p className="text-red-500 mb-2">{error?.message || gError?.message}</p>
+    );
   }
 
   const onSubmit = (data) => {
-    console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
   };
 
@@ -136,6 +145,13 @@ const Login = () => {
               Reset Password
             </Link>
           </p>
+          <div className="divider">OR</div>
+          <button
+            onClick={() => signInWithGoogle()}
+            className="btn btn-outline w-full"
+          >
+            Continue with google
+          </button>
         </div>
       </div>
     </div>

@@ -6,54 +6,65 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./Loading";
 import { toast } from "react-toastify";
 
-const OrderModal = ({ setOrder }) => {
+const OrderModal = ({ setOrder, orderQuantity }) => {
   const [orderMessage, setOrderMessage] = useState(true);
-  const [overMessage, setOverMessage] = useState(true);
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product] = useProductDetails(id);
   const { _id, name, img, price, delivery } = product;
+
+  const order = orderQuantity;
+  const orderNumber = parseInt(order);
+  const priceNumber = parseInt(price);
+  const deliveryNumber = parseInt(delivery);
+  const totalProductPrice = orderNumber * priceNumber;
+  const totalPrice = totalProductPrice + deliveryNumber;
+
   if (loading) {
     return <Loading />;
   }
   const handleOrder = (e) => {
     e.preventDefault();
-    const order = e.target.order.value;
-    const orderNumber = parseInt(order);
-    const priceNumber = parseInt(price);
-    const deliveryNumber = parseInt(delivery);
-    const totalProductPrice = orderNumber * priceNumber;
-    const totalPrice = totalProductPrice + deliveryNumber;
+    // const order = orderQuantity;
+    // const orderNumber = parseInt(order);
+    // const priceNumber = parseInt(price);
+    // const deliveryNumber = parseInt(delivery);
+    // const totalProductPrice = orderNumber * priceNumber;
+    // const totalPrice = totalProductPrice + deliveryNumber;
     const userName = user?.displayName;
     const userEmail = user?.email;
     const userAddress = e.target.address.value;
     const userPhone = e.target.phone.value;
     //
-    const orders = {
-      orderID: _id,
-      productName: name,
-      productImg: img,
-      name: userName,
-      email: userEmail,
-      order: order,
-      address: userAddress,
-      phone: userPhone,
-      price: totalPrice,
-      paid: "",
-    };
-    fetch("http://localhost:5000/order", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(orders),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        toast.success("Order Success");
-      });
-    setOrderMessage(true);
-    setOrder(null);
+    if (orderNumber <= 0) {
+      setOrderMessage(false);
+    } else if (orderNumber > 0) {
+      const orders = {
+        orderID: _id,
+        productName: name,
+        productImg: img,
+        name: userName,
+        email: userEmail,
+        order: order,
+        address: userAddress,
+        phone: userPhone,
+        price: totalPrice,
+        paid: "",
+      };
+      fetch("http://localhost:5000/order", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(orders),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast.success("Order Success");
+        });
+      setOrderMessage(true);
+      setOrder(null);
+    }
   };
 
   return (
@@ -70,9 +81,17 @@ const OrderModal = ({ setOrder }) => {
           <h3 className="font-bold text-lg">
             Your Order is: <span className="text-primary">{name}</span>
           </h3>
+          <h1 className="mt-2">
+            Order Quantity : {orderQuantity} * {price}
+          </h1>
+          <h1>Delivery Charge : {delivery} Tk</h1>
+          <h1>
+            Total Amount : <b>{totalPrice}</b> Tk
+          </h1>
+
           <form
             onSubmit={handleOrder}
-            className="grid grid-cols-1 gap-3 justify-items-center mt-7"
+            className="grid grid-cols-1 gap-3 justify-items-center mt-5"
           >
             <div className="ml-[-270px]">
               <h2>Name</h2>
@@ -80,18 +99,8 @@ const OrderModal = ({ setOrder }) => {
             <input
               type="text"
               name="name"
-              value={user?.displayName}
+              placeholder="Your Name"
               className="input input-bordered w-full max-w-xs"
-            />
-            <div className="ml-[-270px]">
-              <h2>Order</h2>
-            </div>
-            <input
-              type="number"
-              name="order"
-              placeholder="Your Order"
-              className="input input-bordered w-full max-w-xs"
-              required
             />
             <div className="ml-[-260px]">
               <h2>Address</h2>
@@ -113,6 +122,13 @@ const OrderModal = ({ setOrder }) => {
               className="input input-bordered w-full max-w-xs"
               required
             />
+            {orderMessage ? (
+              ""
+            ) : (
+              <p className="text-red-500">
+                You need to Order minimum 1 product
+              </p>
+            )}
             <input
               type="submit"
               value="Submit"

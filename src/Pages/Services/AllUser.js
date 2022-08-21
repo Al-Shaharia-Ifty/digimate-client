@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import MakeAdmin from "../../Components/MakeAdmin";
 
 const AllUser = () => {
+  const [makeAdmin, setMakeAdmin] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
@@ -30,14 +32,14 @@ const AllUser = () => {
           <tbody>
             {userInfo.map((u, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <th>{index + 1}</th>
                 <td>{u.name}</td>
                 <td>{u.email}</td>
                 <td>
                   {u.role === "member" && (
                     <>
                       <label
-                        // onClick={() => setMakeAdmin(u)}
+                        onClick={() => setMakeAdmin(u)}
                         htmlFor="delete-confirm-modal"
                         className="btn btn-xs btn-success"
                       >
@@ -54,6 +56,9 @@ const AllUser = () => {
           </tbody>
         </table>
       </div>
+      {makeAdmin && (
+        <MakeAdmin makeAdmin={makeAdmin} setMakeAdmin={setMakeAdmin} />
+      )}
     </div>
   );
 };

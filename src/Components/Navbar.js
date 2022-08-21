@@ -15,6 +15,7 @@ const Navbar = ({ children }) => {
 
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
   };
   return (
     <div className="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
@@ -22,28 +23,6 @@ const Navbar = ({ children }) => {
       <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="w-full navbar bg-base-100 fixed top-0 z-10 lg:px-12">
-          {/* <div className="navbar-end w-12 ">
-            <label
-              htmlFor="dashboard-sidebar"
-              tabIndex="1"
-              className="btn btn-ghost lg:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-          </div> */}
           <div className="flex-1 px-2 mx-2 text-3xl">
             <Link to="/">Pure Digimart</Link>
           </div>
@@ -105,7 +84,7 @@ const Navbar = ({ children }) => {
                 </ul>
               </li> */}
               <li>
-                <label className="swap swap-rotate py-0">
+                <label className="swap swap-rotate p-0 rounded-full mr-3">
                   {/* <!-- this hidden checkbox controls the state --> */}
                   <input type="checkbox" onChange={() => setDark(!dark)} />
 

@@ -13,7 +13,6 @@ const RequireAuth = ({ children }) => {
   }
 
   if (error) {
-    // console.log(error.message);
   }
 
   if (!user) {

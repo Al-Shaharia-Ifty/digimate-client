@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageOrder from "./Pages/Services/ManageOrder";
 import AddProduct from "./Pages/Services/AddProduct";
 import AllUser from "./Pages/Services/AllUser";
+import ManageProduct from "./Pages/Services/ManageProduct";
 
 AOS.init();
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="manageOrder" element={<ManageOrder />} />
           <Route path="add_product" element={<AddProduct />} />
           <Route path="admin" element={<AllUser />} />
+          <Route path="manage_product" element={<ManageProduct />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

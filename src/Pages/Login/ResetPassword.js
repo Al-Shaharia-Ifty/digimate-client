@@ -3,6 +3,7 @@ import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ResetPassword = () => {
   let signInErrorMessage;
   const onSubmit = (data) => {
     sendPasswordResetEmail(data.email);
+    toast.success("Send Reset Password Email");
     navigate("/login");
   };
   return (

@@ -3,8 +3,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
 import Loading from "../../Components/Loading";
 import auth from "../../firebase.init";
+import useAdmin from "../../Hooks/useAdmin";
+import useMember from "../../Hooks/useMember";
 
 const Services = () => {
+  const [user, loading] = useAuthState(auth);
+  const [member, mLoading] = useMember(user);
+  const [admin, aLoading] = useAdmin(user);
+
+  if (loading || mLoading || aLoading) {
+    return <Loading />;
+  }
   return (
     <div className="mt-16">
       <div className="navbar-end w-16 ">
@@ -36,33 +45,43 @@ const Services = () => {
           className="drawer-toggle"
         />
         <div className="drawer-content">
-          {/* <h2 className="text-4xl text-secondary">My Profile</h2> */}
           <Outlet></Outlet>
         </div>
         <div className="drawer-side ">
           <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-55 text-base-content bg-neutral rounded-lg">
-            <li>
-              <Link to="/services/orders">My Orders</Link>
-            </li>
-            {/* <li>
-              <Link to="/services/review">Add a Review</Link>
-            </li> */}
-            <li>
-              <Link to="/services/manageOrder">Manage All Orders</Link>
-            </li>
-            <li>
-              <Link to="/services/add_product">Add a Product</Link>
-            </li>
-            <li>
-              <Link to="/services/admin">All User</Link>
-            </li>
-            <li>
-              <Link to="/services/manage_product">Manage Product</Link>
-            </li>
-            <li>
-              <Link to="/services">My Profile</Link>
-            </li>
+          <ul className="menu p-4 overflow-y-auto w-56 text-base-content bg-neutral rounded-lg ">
+            {member && (
+              <>
+                <li>
+                  <Link to="/services/orders">My Orders</Link>
+                </li>
+                <li>
+                  <Link to="/services">My Profile</Link>
+                </li>
+              </>
+            )}
+            {admin && (
+              <>
+                <li>
+                  <Link to="/services/orders">My Orders</Link>
+                </li>
+                <li>
+                  <Link to="/services/manageOrder">Manage All Orders</Link>
+                </li>
+                <li>
+                  <Link to="/services/add_product">Add a Product</Link>
+                </li>
+                <li>
+                  <Link to="/services/admin">All User</Link>
+                </li>
+                <li>
+                  <Link to="/services/manage_product">Manage Product</Link>
+                </li>
+                <li>
+                  <Link to="/services">My Profile</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
