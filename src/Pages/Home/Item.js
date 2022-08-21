@@ -7,11 +7,11 @@ const Item = ({ item }) => {
 
   return (
     <div class="card bg-neutral hover:shadow-xl transition ease-linear duration-200 ">
-      <div className="overflow-hidden">
+      <div className="overflow-hidden h-[300px]">
         <img
           src={img}
           alt=""
-          className="hover:scale-125 transition ease-linear delay-75 duration-500 "
+          className="hover:scale-125 transition ease-linear delay-75 duration-500 h-full mx-auto"
         />
       </div>
       <div class="card-body">

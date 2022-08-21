@@ -4,6 +4,7 @@ import auth from "../firebase.init";
 import useProductDetails from "../Hooks/useProductDetails";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./Loading";
+import { toast } from "react-toastify";
 
 const OrderModal = ({ setOrder }) => {
   const [orderMessage, setOrderMessage] = useState(true);
@@ -11,37 +12,46 @@ const OrderModal = ({ setOrder }) => {
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product] = useProductDetails(id);
-  const { _id, name, img, minimum, available, price } = product;
-  let orderErrorMessage;
+  const { _id, name, img, price, delivery } = product;
   if (loading) {
     return <Loading />;
   }
-  const handleOrderPrice = (e) => {
-    const order = e.target.value;
-    const orderNumber = parseInt(order);
-    if (orderNumber <= 0) {
-      orderErrorMessage = (
-        <p className="text-red-600">Please input Positive number</p>
-      );
-    }
-    console.log(e.target.value);
-    console.log(orderErrorMessage);
-  };
   const handleOrder = (e) => {
     e.preventDefault();
     const order = e.target.order.value;
     const orderNumber = parseInt(order);
-    const minimumNumber = parseInt(minimum);
     const priceNumber = parseInt(price);
-    const totalPrice = orderNumber * priceNumber;
-    const availableNumber = parseInt(available);
+    const deliveryNumber = parseInt(delivery);
+    const totalProductPrice = orderNumber * priceNumber;
+    const totalPrice = totalProductPrice + deliveryNumber;
     const userName = user?.displayName;
     const userEmail = user?.email;
     const userAddress = e.target.address.value;
     const userPhone = e.target.phone.value;
-    const availableOrder = available - order;
-    const updateProduct = { availableOrder };
-
+    //
+    const orders = {
+      orderID: _id,
+      productName: name,
+      productImg: img,
+      name: userName,
+      email: userEmail,
+      order: order,
+      address: userAddress,
+      phone: userPhone,
+      price: totalPrice,
+      paid: "",
+    };
+    fetch("http://localhost:5000/order", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(orders),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Order Success");
+      });
     setOrderMessage(true);
     setOrder(null);
   };
@@ -74,17 +84,6 @@ const OrderModal = ({ setOrder }) => {
               className="input input-bordered w-full max-w-xs"
             />
             <div className="ml-[-270px]">
-              <h2>Email</h2>
-            </div>
-            <input
-              type="email"
-              name="email"
-              readOnly
-              value={user?.email}
-              className="input input-bordered w-full max-w-xs"
-            />
-
-            <div className="ml-[-270px]">
               <h2>Order</h2>
             </div>
             <input
@@ -92,10 +91,8 @@ const OrderModal = ({ setOrder }) => {
               name="order"
               placeholder="Your Order"
               className="input input-bordered w-full max-w-xs"
-              onChange={handleOrderPrice}
               required
             />
-            {orderErrorMessage}
             <div className="ml-[-260px]">
               <h2>Address</h2>
             </div>
@@ -110,30 +107,16 @@ const OrderModal = ({ setOrder }) => {
               <h2>Number</h2>
             </div>
             <input
-              type="text"
+              type="number"
               name="phone"
               placeholder="Phone Number"
               className="input input-bordered w-full max-w-xs"
               required
             />
-            {orderMessage ? (
-              ""
-            ) : (
-              <p className="text-red-500">
-                You need to add Minimum {minimum} Orders
-              </p>
-            )}
-            {overMessage ? (
-              ""
-            ) : (
-              <p className="text-red-500">
-                We have {available} available Product
-              </p>
-            )}
             <input
               type="submit"
               value="Submit"
-              className="btn btn-modal w-full max-w-xs"
+              className="btn btn-primary btn-outline w-full max-w-xs"
             />
           </form>
         </div>

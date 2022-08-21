@@ -7,7 +7,8 @@ const ProductDetails = () => {
   const [order, setOrder] = useState(null);
   const { id } = useParams();
   const [product] = useProductDetails(id);
-  const { name, img, description, available, price } = product;
+  const { name, img, description, price, delivery } = product;
+
   return (
     <div className="mt-16">
       <div className="hero min-h-screen">
@@ -17,15 +18,17 @@ const ProductDetails = () => {
             <h1 className="text-5xl font-bold">{name}</h1>
             <p className="pt-6">Description: {description}</p>
             <p>
-              Available: <span className="text-green-500">{available}</span>
+              Price <span className="text-red-500">(per unit)</span>: Tk{" "}
+              <b>{price}</b>{" "}
             </p>
             <p>
-              Price <span className="text-red-500">(per unit)</span>: ৳{price}
+              Delivery charge: Tk <b>{delivery}</b>
             </p>
+
             <label
               onClick={() => setOrder({ hello: "hello" })}
               htmlFor="orderModal"
-              className="btn btn-primary text-white mt-5"
+              className="btn btn-primary mt-5"
             >
               Order now
             </label>

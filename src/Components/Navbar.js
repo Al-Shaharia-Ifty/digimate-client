@@ -8,7 +8,6 @@ import Loading from "./Loading";
 const Navbar = ({ children }) => {
   const [dark, setDark] = useState(false);
   const [user, loading] = useAuthState(auth);
-  console.log(window.location.pathname);
 
   if (loading) {
     return <Loading />;
@@ -89,7 +88,7 @@ const Navbar = ({ children }) => {
                   Contact
                 </NavLink>
               </li>
-              <li className="dropdown dropdown-end dropdown-hover rounded-lg">
+              {/* <li className="dropdown dropdown-end dropdown-hover rounded-lg">
                 <label tabIndex="0" className="btn btn-primary btn-outline">
                   Book Now
                 </label>
@@ -104,7 +103,7 @@ const Navbar = ({ children }) => {
                     <Link to="">Item 2</Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li>
                 <label className="swap swap-rotate py-0">
                   {/* <!-- this hidden checkbox controls the state --> */}
@@ -179,7 +178,7 @@ const Navbar = ({ children }) => {
               Contact
             </NavLink>
           </li>
-          <div
+          {/* <div
             tabIndex="0"
             className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
           >
@@ -192,7 +191,7 @@ const Navbar = ({ children }) => {
                 <Link to="">Item 2</Link>
               </li>
             </div>
-          </div>
+          </div> */}
           <li>
             <label className="swap swap-rotate">
               {/* <!-- this hidden checkbox controls the state --> */}

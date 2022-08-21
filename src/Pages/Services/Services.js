@@ -39,16 +39,15 @@ const Services = () => {
           {/* <h2 className="text-4xl text-secondary">My Profile</h2> */}
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side ">
           <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-55 bg-base-100 text-base-content">
+          <ul className="menu p-4 overflow-y-auto w-55 text-base-content bg-neutral rounded-lg">
             <li>
               <Link to="/services/orders">My Orders</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/services/review">Add a Review</Link>
-            </li>
-
+            </li> */}
             <li>
               <Link to="/services/manageOrder">Manage All Orders</Link>
             </li>
