@@ -81,13 +81,16 @@ const OrderModal = ({ setOrder, orderQuantity }) => {
           <h3 className="font-bold text-lg">
             Your Order is: <span className="text-primary">{name}</span>
           </h3>
-          <h1 className="mt-2">
-            Order Quantity : {orderQuantity} * {price}
-          </h1>
-          <h1>Delivery Charge : {delivery} Tk</h1>
-          <h1>
-            Total Amount : <b>{totalPrice}</b> Tk
-          </h1>
+          <div>
+            <div>
+              <h1 className="mt-2">Order Quantity : {orderQuantity}</h1>
+              <h1>Order Amount : {totalProductPrice}</h1>
+              <h1>Delivery Charge : {delivery} Tk</h1>
+              <h1>
+                Total Amount : <b>{totalPrice}</b> Tk
+              </h1>
+            </div>
+          </div>
 
           <form
             onSubmit={handleOrder}

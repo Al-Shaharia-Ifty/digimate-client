@@ -1,10 +1,10 @@
 // import React, { useState } from "react";
 import { useEffect, useState } from "react";
 import Item from "./Item";
+import Loading from "../../Components/Loading";
 
 const Products = () => {
   const [items, setItems] = useState([]);
-  //   setItems(["hello"]);
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -13,6 +13,9 @@ const Products = () => {
         setItems(data);
       });
   }, []);
+  if (!items) {
+    return <Loading />;
+  }
   return (
     <div className="mx-8 lg:mx-12">
       <h1 className="text-4xl text-center font-bold my-12">Our Products</h1>

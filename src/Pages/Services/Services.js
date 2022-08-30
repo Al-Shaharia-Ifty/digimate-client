@@ -78,7 +78,7 @@ const Services = () => {
                   <Link to="/services/manage_product">Manage Product</Link>
                 </li>
                 <li>
-                  <Link to="/services">My Profile</Link>
+                  <Link to="/services/profile">My Profile</Link>
                 </li>
               </>
             )}
