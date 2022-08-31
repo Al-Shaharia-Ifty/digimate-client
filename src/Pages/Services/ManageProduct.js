@@ -6,7 +6,7 @@ import Loading from "../../Components/Loading";
 const ManageProduct = () => {
   const [deleteProduct, setDeleteProduct] = useState(null);
   const { data: products, isLoading } = useQuery("products", () =>
-    fetch("http://localhost:5000/products", {
+    fetch("https://vast-peak-81199.herokuapp.com/products", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

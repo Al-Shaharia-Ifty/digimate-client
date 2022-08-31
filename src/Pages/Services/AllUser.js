@@ -6,7 +6,7 @@ const AllUser = () => {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/all_user", {
+    fetch("https://vast-peak-81199.herokuapp.com/all_user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

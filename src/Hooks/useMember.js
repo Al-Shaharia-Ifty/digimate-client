@@ -6,7 +6,7 @@ const useMember = (user) => {
   useEffect(() => {
     const email = user?.email;
     if (email) {
-      fetch(`http://localhost:5000/member/${email}`, {
+      fetch(`https://vast-peak-81199.herokuapp.com/member/${email}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

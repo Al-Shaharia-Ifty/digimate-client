@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
 import DeleteOrder from "../../Components/DeleteOrder";
 import Loading from "../../Components/Loading";
 import auth from "../../firebase.init";
@@ -11,7 +10,7 @@ const MyOrder = () => {
   const [user, loading] = useAuthState(auth);
   useEffect(() => {
     if (user) {
-      const url = `http://localhost:5000/order?buyer=${user.email}`;
+      const url = `https://vast-peak-81199.herokuapp.com/order?buyer=${user.email}`;
       fetch(url, {
         method: "GET",
         headers: {

@@ -4,7 +4,7 @@ const useProductDetails = (id) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const url = `http://localhost:5000/product/${id}`;
+    const url = `https://vast-peak-81199.herokuapp.com/product/${id}`;
     fetch(url, {
       method: "GET",
       headers: {

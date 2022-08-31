@@ -50,7 +50,7 @@ const SignUp = () => {
     const email = data.email;
     const currentUser = { name: name, email: email, role: "member" };
     if (email) {
-      fetch(`http://localhost:5000/user/member/${email}`, {
+      fetch(`https://vast-peak-81199.herokuapp.com/user/member/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

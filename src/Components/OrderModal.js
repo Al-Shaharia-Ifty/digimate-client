@@ -51,7 +51,7 @@ const OrderModal = ({ setOrder, orderQuantity }) => {
         price: totalPrice,
         paid: "",
       };
-      fetch("http://localhost:5000/order", {
+      fetch("https://vast-peak-81199.herokuapp.com/order", {
         method: "POST",
         headers: {
           "content-type": "application/json",

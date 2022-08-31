@@ -8,7 +8,7 @@ const ManageOrder = () => {
   const [order, setOrder] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/all_order", {
+    fetch("https://vast-peak-81199.herokuapp.com/all_order", {
       method: "GET",
     })
       .then((res) => res.json())

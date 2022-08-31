@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const MakeAdmin = ({ makeAdmin, setMakeAdmin }) => {
   const { name, _id } = makeAdmin;
   const handleShipped = () => {
-    fetch(`http://localhost:5000/makeAdmin/${_id}`, {
+    fetch(`https://vast-peak-81199.herokuapp.com/makeAdmin/${_id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

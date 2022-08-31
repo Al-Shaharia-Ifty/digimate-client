@@ -19,6 +19,7 @@ import ManageOrder from "./Pages/Services/ManageOrder";
 import AddProduct from "./Pages/Services/AddProduct";
 import AllUser from "./Pages/Services/AllUser";
 import ManageProduct from "./Pages/Services/ManageProduct";
+import Navber from "./Components/Navber";
 
 AOS.init();
 function App() {

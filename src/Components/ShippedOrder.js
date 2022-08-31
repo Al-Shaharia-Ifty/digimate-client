@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const ShippedOrder = ({ shippedOrder, setShippedOrder }) => {
   const { productName, _id } = shippedOrder;
   const handleShipped = () => {
-    fetch(`http://localhost:5000/order_success/${_id}`, {
+    fetch(`https://vast-peak-81199.herokuapp.com/order_success/${_id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

@@ -34,7 +34,7 @@ const AddProduct = () => {
             delivery: data.delivery,
           };
           // send to your database
-          fetch("http://localhost:5000/products", {
+          fetch("https://vast-peak-81199.herokuapp.com/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",
